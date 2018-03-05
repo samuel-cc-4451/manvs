@@ -1,6 +1,5 @@
 'use strict';
 import * as vscode from 'vscode';
-import { exec } from 'child_process';
 import { ManContentProvider } from './ManContentProvider';
 
 export async function activate(context: vscode.ExtensionContext) {

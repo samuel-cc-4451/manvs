@@ -7,7 +7,7 @@ import { exec } from 'child_process';
 export class ManContentProvider implements vscode.TextDocumentContentProvider {
     private _onDidChange = new vscode.EventEmitter<vscode.Uri>();
     private uri = vscode.Uri.parse('manvs://authority/manvs');
-    private resources = path.join(__dirname, '../resources');
+    //private resources = path.join(__dirname, '../resources');
 
     private data: string = "";
 
