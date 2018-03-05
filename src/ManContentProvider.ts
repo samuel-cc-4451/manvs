@@ -1,7 +1,7 @@
 'use strict';
 
 import * as vscode from 'vscode';
-import * as path from 'path';
+//import * as path from 'path';
 import { exec } from 'child_process';
 
 export class ManContentProvider implements vscode.TextDocumentContentProvider {
