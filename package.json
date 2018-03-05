@@ -1,7 +1,7 @@
 {
     "name": "manvs",
     "displayName": "manvs",
-    "description": "MAn pages inside VS Code",
+    "description": "MAN pages inside VS Code",
     "version": "1.0.0",
     "publisher": "l7ssha",
     "engines": {
