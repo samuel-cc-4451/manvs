@@ -12,7 +12,8 @@ export async function activate(context: vscode.ExtensionContext) {
         if(cmd == undefined)
             return;
 
-        if(cmd.trim() == "")
+        cmd = cmd.trim();
+        if(cmd == "")
             return;
 
         await provider.update(cmd);
