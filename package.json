@@ -1,0 +1,49 @@
+{
+    "name": "manvs",
+    "displayName": "manvs",
+    "description": "MAn pages inside VS Code",
+    "version": "1.0.0",
+    "publisher": "l7ssha",
+    "engines": {
+        "vscode": "^1.20.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "*"
+    ],
+    "contributes": {
+        "commands":[
+            {
+                "command": "manvs.man",
+                "title": "Open MAN Page"
+            }
+        ]
+    },
+    "main": "./out/extension",
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6",
+        "tslint": "^5.8.0",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/l7ssha/manvs/issues",
+        "email": "szymon.uglis@hotmail.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/l7ssha/manvs.git"
+    },
+    "homepage": "https://github.com/l7ssha/manvs"
+}
