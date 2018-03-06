@@ -14,7 +14,7 @@
         "*"
     ],
     "contributes": {
-        "commands":[
+        "commands": [
             {
                 "command": "manvs.man",
                 "title": "Open MAN Page"
@@ -34,7 +34,11 @@
         "vscode": "^1.1.6",
         "tslint": "^5.8.0",
         "@types/node": "^7.0.43",
-        "@types/mocha": "^2.2.42"
+        "@types/mocha": "^2.2.42",
+        "@types/mustache": "^0.8.30"
+    },
+    "dependencies": {
+        "mustache": "^2.3.0"
     },
     "license": "MIT",
     "bugs": {

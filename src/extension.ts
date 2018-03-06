@@ -8,7 +8,6 @@ export async function activate(context: vscode.ExtensionContext) {
 
     let manPage = vscode.commands.registerCommand('manvs.man', async () => {
         let cmd = await vscode.window.showInputBox();
-
         if(cmd == undefined)
             return;
 
@@ -16,7 +15,7 @@ export async function activate(context: vscode.ExtensionContext) {
         if(cmd == "")
             return;
 
-        await provider.update(cmd);
+        await provider.update(`man ${cmd}`);
 
         return vscode.commands.executeCommand('vscode.previewHtml', vscode.Uri.parse('manvs://authority/manvs'), vscode.ViewColumn.Active, `MAN ${cmd}`).then(_ => {}, _ => {
             vscode.window.showErrorMessage("Can't open man page.");
