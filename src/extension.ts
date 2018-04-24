@@ -15,7 +15,7 @@ export async function activate(context: vscode.ExtensionContext) {
         if(cmd == "")
             return;
 
-        await provider.update(`man ${cmd}`);
+        await provider.update(`man ${cmd} | col -b`);
 
         return vscode.commands.executeCommand('vscode.previewHtml', vscode.Uri.parse('manvs://authority/manvs'), vscode.ViewColumn.Active, `MAN ${cmd}`).then(_ => {}, _ => {
             vscode.window.showErrorMessage("Can't open man page.");
@@ -24,5 +24,6 @@ export async function activate(context: vscode.ExtensionContext) {
 
     context.subscriptions.push(registration, manPage);
 }
+
 export function deactivate() {
 }
