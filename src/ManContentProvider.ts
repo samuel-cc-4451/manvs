@@ -31,23 +31,60 @@ export class ManContentProvider implements vscode.TextDocumentContentProvider {
         this._onDidChange.fire(this.uri);
     }
 
+    public async displayMan(cmd: string | undefined) {
+        if (cmd == undefined)
+            return;
+
+        cmd = cmd.trim();
+        if (cmd == "")
+            return;
+
+        await this.update(`man ${cmd} | col -b`);
+
+        return vscode.commands.executeCommand('vscode.previewHtml', vscode.Uri.parse('manvs://authority/manvs'), vscode.ViewColumn.Active, `MAN ${cmd}`).then(_ => { }, _ => {
+            vscode.window.showErrorMessage("Can't open man page.");
+        });
+    }
+
+    public getCursorSelection() {
+        var options: vscode.InputBoxOptions = { value: "" };
+        const { activeTextEditor } = vscode.window;
+        // If there's no activeTextEditor, do nothing.
+        if (!activeTextEditor) {
+            return options;
+        }
+
+        const { document, selection } = activeTextEditor;
+        const wordAtCursorRange = document.getWordRangeAtPosition(selection.active);
+
+        // If at this point, we don't have a word range, abort.
+        if (wordAtCursorRange === undefined) {
+            return options;
+        }
+        else {
+            options.value = document.getText(wordAtCursorRange);
+            return options;
+        }
+
+    }
+
     private sh(cmd: string) {
         return new Promise(function (resolve, reject) {
             exec(cmd, (err, stdout: string, stderr: string) => {
                 if (err)
                     reject(err);
                 else
-                    resolve({stdout, stderr});
+                    resolve({ stdout, stderr });
             });
         });
     }
 
     provideTextDocumentContent(_: vscode.Uri): vscode.ProviderResult<string> {
-        if(this.template == "" || this.data == "") {
+        if (this.template == "" || this.data == "") {
             vscode.window.showErrorMessage("Internal error. Try restarting vs code.");
             return;
         }
 
-        return mustache.render(this.template, {manpage: this.data});
+        return mustache.render(this.template, { manpage: this.data });
     }
 }

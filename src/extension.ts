@@ -7,19 +7,8 @@ export async function activate(context: vscode.ExtensionContext) {
     let registration = vscode.workspace.registerTextDocumentContentProvider("manvs", provider);
 
     let manPage = vscode.commands.registerCommand('manvs.man', async () => {
-        let cmd = await vscode.window.showInputBox();
-        if(cmd == undefined)
-            return;
-
-        cmd = cmd.trim();
-        if(cmd == "")
-            return;
-
-        await provider.update(`man ${cmd} | col -b`);
-
-        return vscode.commands.executeCommand('vscode.previewHtml', vscode.Uri.parse('manvs://authority/manvs'), vscode.ViewColumn.Active, `MAN ${cmd}`).then(_ => {}, _ => {
-            vscode.window.showErrorMessage("Can't open man page.");
-        });
+        let cmd = await vscode.window.showInputBox(provider.getCursorSelection());
+        provider.displayMan(cmd);
     });
 
     context.subscriptions.push(registration, manPage);
